@@ -101,9 +101,14 @@ r6_wrapper <- function(model_path,...){
 }
 
 #### Save the Demo Model Object RDS.
-model_class<-r6_wrapper("PATH_TO_MACHINE_LEARNING_MODELS", "path_to_representative_file_A", "path_to_representative_file_B")
+model_class<-r6_wrapper("./serialised_models/chicken_reapplication_models_240228.RDS", "./demo_sensor_files/msi_scores_demo.csv", "./demo_sensor_files/ftir_scores_demo.csv")
 ### Test the model.
 model_class$new()$test()
 
-saveRDS(model_class, "NAME/OF/SERIALISED/OBJECT/HERE.RDS")
+name <- Sys.getenv("NAME", unset = NA)
+if(is.na(name)){
+  name <- format(Sys.Date(), format = "%Y%m%d")
+
+}
+saveRDS(model_class, paste0("../endpoint/demo_models/",name))
 
