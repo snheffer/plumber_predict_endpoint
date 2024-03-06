@@ -6,6 +6,10 @@ This plumber package instantiates an API for inference tasks using R machine lea
 
 [2. ML Object Interfaces](#ml-object-interfaces)
 
+[3. Installation](#installation)
+
+[4. Demonstration](#demonstration)
+
 ## Endpoints
 
 ---
@@ -50,8 +54,22 @@ A demonstration of a script that builds a compatible inference object is contain
 
 ## Installation
 
-There is a run_plumber directive in the associated makefile, assuming that all dependencies are installed.
+*Requirements:*
+- R 4.3.2
+- R Packages described in renv.lock file
+- make
+- S3 implementation (tested only on [Minio](https://min.io/))
+- docker (if necessary)
 
-Dependencies have been managed with renv. This may take some additional configuration.
+There is a "run_plumber" directive in the associated makefile, assuming that all dependencies are installed.
+
+Dependencies have been managed with [renv](https://cran.r-project.org/web/packages/renv/vignettes/renv.html). This may take some additional configuration.
+In order to do so access an R session in the project directory, and run "Renv::restore()" to restore the necessary packages.
 
 There is an associated Docker image, however I have not had time to make this work properly. Feel free to attempt to fix.
+
+## Demonstration
+
+Within the "demo_model_configuration" directory, there is a script named build_demo_model_object.R, which when run using the makefile directive "build_demo_model", will generate an ML object in the "endpoint/demo_models" directory, with an ID corresponding to the current date (YYYYmmdd).
+
+This ID can then be referenced in ML demonstration tasks, and corresponds to the demonstration MSI and FTIR data provided in the demo_model_configuration/demo_sensor_files directory. 
